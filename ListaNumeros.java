@@ -1,16 +1,17 @@
 /**
  * Un objeto de esta clase
- * guarda una lista de números enteros
+ * guarda una lista de nï¿½meros enteros
  * 
- * La clase incluye una serie de métodos de instancia
+ * La clase incluye una serie de mï¿½todos de instancia
  * para hacer operaciones sobre la lista
- * y dos  métodos estáticos para trabajar con
+ * y dos  mï¿½todos estï¿½ticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author - Evelin Virunurm
  */
 
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class ListaNumeros {
@@ -19,47 +20,50 @@ public class ListaNumeros {
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    //TODO
-    
-    
+    private int[] lista;
+    private int pos;
 
     /**
      * Constructor de la clase ListaNumeros
      * Crea e inicializa adecuadamente los
      * atributos
      *
-     * @param n el tamaño máximo de la lista
+     * @param n el tamaï¿½o mï¿½ximo de la lista
      */
-    public ListaNumeros() {
-        //TODO
-        
+    public ListaNumeros(int n) {
+        this.lista = new int[n];
+        this.pos = 0;
     }
 
     /**
-     * Añade un valor al final de la lista 
-     * siempre que no esté completa
+     * Aï¿½ade un valor al final de la lista 
+     * siempre que no estï¿½ completa
      *
-     * @param numero el valor que se añade.  
-     * @return true si se ha podido añadir, false en otro caso
+     * @param numero el valor que se aï¿½ade.  
+     * @return true si se ha podido aï¿½adir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
-        
-        
-
+    public boolean addElemento(int numero) {
+        if (!estaCompleta()) {
+            int[] copy = Arrays.copyOf(this.lista, this.lista.length + 1);
+            copy[copy.length - 1] = numero;
+            this.pos++;
+            System.out.println(copy);
+            this.lista = copy;
+            return true;
+        }
+        return false;
     }
 
     /**
-     * @return true si la lista está completa, false en otro caso
+     * @return true si la lista estï¿½ completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
-        //TODO
-
+    public boolean estaCompleta() {
+        return (this.pos == this.DIMENSION);
     }
 
     /**
-     * @return true si la lista está vacía, false en otro caso.
+     * @return true si la lista estï¿½ vacï¿½a, false en otro caso.
      * Hacer sin if
      */
     public void estaVacia() {
@@ -68,7 +72,7 @@ public class ListaNumeros {
     }
 
     /**
-     * @return el nº de elementos realmente guardados en la lista
+     * @return el nï¿½ de elementos realmente guardados en la lista
      */
     public void getTotalNumeros() {
         //TODO
@@ -76,17 +80,17 @@ public class ListaNumeros {
     }
 
     /**
-     * Vacía la lista
+     * Vacï¿½a la lista
      */
     public void vaciarLista() {
        //TODO
     }
 
     /**
-     * @return una cadena con representación textual de la lista 
+     * @return una cadena con representaciï¿½n textual de la lista 
      * (leer enunciado)
      * 
-     * Si la lista está vacía devuelve ""
+     * Si la lista estï¿½ vacï¿½a devuelve ""
      */
     public String toString() {
        //TODO
@@ -107,9 +111,9 @@ public class ListaNumeros {
 
     /**
      *  
-     * @return el segundo valor máximo en la lista
-     * Cuando no haya un segundo máximo el método 
-     * devolverá el valor Integer.MIN_VALUE
+     * @return el segundo valor mï¿½ximo en la lista
+     * Cuando no haya un segundo mï¿½ximo el mï¿½todo 
+     * devolverï¿½ el valor Integer.MIN_VALUE
      * 
      * Si lista = {21, -5, 28, -7, 28, 77, 77, -17, 21, 15, 28, 28, 77} se devuelve 28
      * Si lista = {21, -5, 28, -7, 77} se devuelve 28
@@ -117,7 +121,7 @@ public class ListaNumeros {
      * Si lista = {21} se devuelve Integer.MIN_VALUE
      * Si lista = {21, 21, 21, 21} se devuelve Integer.MIN_VALUE
      * 
-     * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
+     * No se puede usar ningï¿½n otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
     public void segundoMaximo() {       
@@ -127,10 +131,10 @@ public class ListaNumeros {
     }
 
     /**
-     * El método coloca los valores que son segundos máximos al principio de
-     * la lista respetando el orden de aparición del resto de elementos
+     * El mï¿½todo coloca los valores que son segundos mï¿½ximos al principio de
+     * la lista respetando el orden de apariciï¿½n del resto de elementos
      * 
-     * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
+     * No se puede usar ningï¿½n otro array auxiliar ni hay que ordenar previamente
      * la lista
      * 
      * Si lista = {21, -5, 28, -7, 28, 77, 77, -17, 21, 15, 28, 28, 77} 
@@ -140,8 +144,8 @@ public class ListaNumeros {
      * Si lista = {21} lista queda igual y se devuelve false
      * Si lista = {21, 21, 21, 21} lista queda igual y se devuelve false
      * 
-     * @return true si se han colocado los segundos máximos
-     *          false si no se han colocado los segundos máximos porque no había ninguno
+     * @return true si se han colocado los segundos mï¿½ximos
+     *          false si no se han colocado los segundos mï¿½ximos porque no habï¿½a ninguno
      */
     public void segundosMaximosAlPrincipio() {
         //TODO
@@ -151,14 +155,14 @@ public class ListaNumeros {
     }
 
     /**
-     * @param numero búsqueda binaria de  numero en lista
-     * @return devuelve -1 si no se encuentra o la posición en la que aparece
+     * // @param numero bï¿½squeda binaria de  numero en lista
+     * @return devuelve -1 si no se encuentra o la posiciï¿½n en la que aparece
      *  
      * El array original lista no se modifica
      * Para ello crea  previamente una copia
      * de lista y trabaja  con la copia
      *  
-     * Usa exclusivamente métodos de la clase Arrays
+     * Usa exclusivamente mï¿½todos de la clase Arrays
      */
     public void buscarBinario() {
          //TODO
@@ -169,7 +173,7 @@ public class ListaNumeros {
 
     /**
      * 
-     * @return devuelve un array bidimensional de enteros de tamaño DIMENSION
+     * @return devuelve un array bidimensional de enteros de tamaï¿½o DIMENSION
      * inicializado con valores aleatorios entre 0 y 10 inclusive
      * 
      * Estos valores van a representar el brillo de una zona del espacio
@@ -183,12 +187,12 @@ public class ListaNumeros {
     }
 
     /**
-     * @param  un array bidimensional brillos 
+     * // @param  un array bidimensional brillos
      * @return un nuevo array bidimensional de valores booleanos
      *          de las mismas dimensiones que el array brillos con
      *          valores true en las posiciones donde hay estrellas
      * 
-     * Una posición f,c del array brillos es una estrella 
+     * Una posiciï¿½n f,c del array brillos es una estrella 
      * si la suma del valor de los brillos de sus cuatro vecinos 
      * (arriba, abajo, derecha e izquierda) es mayor que 30
      * 
