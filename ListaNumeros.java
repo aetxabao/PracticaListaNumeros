@@ -81,6 +81,7 @@ public class ListaNumeros {
      */
     public void vaciarLista() {
         this.lista = new int[this.lista.length];
+        this.pos = 0;
     }
 
     /**
@@ -261,9 +262,7 @@ public class ListaNumeros {
      */
      public static boolean[][] detectarEstrellas(int[][] array) {
          boolean[][] hayEstrellas = new boolean[array.length][array.length];
-         for (boolean[] row: hayEstrellas) {
-             Arrays.fill(row, false);
-         }
+
          for (int i = 0; i < array.length; i++) {
              if (i != 0 && i != array.length - 1) {
                  for (int j = 0; j < array[i].length; j++) {
