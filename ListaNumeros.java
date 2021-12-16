@@ -156,12 +156,12 @@ public class ListaNumeros {
         int firMax = Integer.MIN_VALUE;
         int secMax = Integer.MIN_VALUE;
         for (int i = 0; i < this.lista.length; i++) {
-            if (firMax < this.lista[i]) {
+            if (firMax < this.lista[i] && this.lista[i] != 0) {
                 secMax = firMax;
                 firMax = this.lista[i];
                 continue;
             }
-            if (secMax < this.lista[i] && this.lista[i] != firMax) {
+            if (secMax < this.lista[i] && this.lista[i] != firMax && this.lista[i] != 0) {
                 secMax = this.lista[i];
             }
         }
@@ -193,11 +193,13 @@ public class ListaNumeros {
         if (secMax != Integer.MIN_VALUE) {
             for (int i = 0; i < this.lista.length; i++) {
                 if (this.lista[i] == secMax) {
-
+                    for (int j = i; j > 0; j--) {
+                        this.lista[j] = this.lista[j - 1];
+                    }
+                    this.lista[counter] = secMax;
                     counter++;
                 }
             }
-            System.out.println(counter);
             return true;
         }
         return false;
@@ -214,12 +216,17 @@ public class ListaNumeros {
      * Usa exclusivamente metodos de la clase Arrays
      */
     public int buscarBinario(int num) {
-         //TODO
         int[] copy = Arrays.copyOf(this.lista, this.lista.length);
-        copy
+        Arrays.sort(copy);
 
-
-       return 0;
+        if (Arrays.binarySearch(copy, num) > -1) {
+            for (int i = 0; i < this.lista.length; i++) {
+                if (this.lista[i] == num) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     /**
