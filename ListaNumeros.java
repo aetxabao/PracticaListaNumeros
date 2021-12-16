@@ -1,7 +1,7 @@
 /**
  * Un objeto de esta clase
  * guarda una lista de n�meros enteros
- * 
+ *
  * La clase incluye una serie de m�todos de instancia
  * para hacer operaciones sobre la lista
  * y dos  m�todos est�ticos para trabajar con
@@ -10,6 +10,8 @@
  * @author - Evelin Virunurm
  */
 
+
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -28,7 +30,7 @@ public class ListaNumeros {
      * Crea e inicializa adecuadamente los
      * atributos
      *
-     * @param n el tama�o m�ximo de la lista
+     * @param n el tamano maximo de la lista
      */
     public ListaNumeros(int n) {
         this.lista = new int[n];
@@ -36,19 +38,16 @@ public class ListaNumeros {
     }
 
     /**
-     * A�ade un valor al final de la lista 
+     * Añade un valor al final de la lista
      * siempre que no est� completa
      *
-     * @param numero el valor que se a�ade.  
-     * @return true si se ha podido a�adir, false en otro caso
+     * @param numero el valor que se anade.
+     * @return true si se ha podido anadir, false en otro caso
      */
     public boolean addElemento(int numero) {
         if (!estaCompleta()) {
-            int[] copy = Arrays.copyOf(this.lista, this.lista.length + 1);
-            copy[copy.length - 1] = numero;
+            this.lista[pos] = numero;
             this.pos++;
-            System.out.println(copy);
-            this.lista = copy;
             return true;
         }
         return false;
@@ -59,48 +58,77 @@ public class ListaNumeros {
      * Hacer sin if
      */
     public boolean estaCompleta() {
-        return (this.pos == this.DIMENSION);
+        return (this.pos == this.lista.length);
     }
 
     /**
-     * @return true si la lista est� vac�a, false en otro caso.
+     * @return true si la lista esta vacia, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
-       //TODO
-
+    public boolean estaVacia() {
+        return (this.pos == 0);
     }
 
     /**
-     * @return el n� de elementos realmente guardados en la lista
+     * @return el nu de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
-        //TODO
-
+    public int getTotalNumeros() {
+        return pos;
     }
 
     /**
-     * Vac�a la lista
+     * Vacia la lista
      */
     public void vaciarLista() {
-       //TODO
+        this.lista = new int[this.lista.length];
     }
 
     /**
-     * @return una cadena con representaci�n textual de la lista 
+     * @return una cadena con representacion textual de la lista
      * (leer enunciado)
-     * 
-     * Si la lista est� vac�a devuelve ""
+     *
+     * Si la lista esta vacia devuelve ""
      */
     public String toString() {
-       //TODO
-       
-       
-       
-       return "";
+        if (estaVacia()) {
+            return "";
+        }
+        String s = "";
+        for (int i = 0; i < this.lista.length; i++) {
+            if (this.lista[i] != 0) {
+                s += anadirCabecera();
+            }
+            s += saltoLineaFinal(i);
+        }
+        for (int i = 0; i < this.lista.length; i++) {
+            if (this.lista[i] != 0) {
+                s += Utilidades.centrarNumero(this.lista[i], this.ANCHO_FORMATO);
+            }
+            s += saltoLineaFinal(i);
+        }
+        for (int i = 0; i < this.lista.length; i++) {
+            if (this.lista[i] != 0) {
+                s += anadirCabecera();
+            }
+            s += saltoLineaFinal(i);
+        }
+        return s;
     }
 
-     
+    private String anadirCabecera() {
+        String s = "";
+        for (int i = 0; i < this.ANCHO_FORMATO; i++) {
+            s += this.CAR_CABECERA;
+        }
+        return s;
+    }
+
+    private String saltoLineaFinal(int i) {
+        if (i == this.lista.length - 1) {
+            return "\n";
+        }
+        return "";
+    }
 
     /**
      * Mostrar en pantalla la lista
@@ -110,80 +138,106 @@ public class ListaNumeros {
     }
 
     /**
-     *  
-     * @return el segundo valor m�ximo en la lista
-     * Cuando no haya un segundo m�ximo el m�todo 
-     * devolver� el valor Integer.MIN_VALUE
-     * 
+     *
+     * @return el segundo valor maximo en la lista
+     * Cuando no haya un segundo maximo el metodo
+     * devolvera el valor Integer.MIN_VALUE
+     *
      * Si lista = {21, -5, 28, -7, 28, 77, 77, -17, 21, 15, 28, 28, 77} se devuelve 28
      * Si lista = {21, -5, 28, -7, 77} se devuelve 28
      * Si lista = {77, 21} se devuelve 21
      * Si lista = {21} se devuelve Integer.MIN_VALUE
      * Si lista = {21, 21, 21, 21} se devuelve Integer.MIN_VALUE
-     * 
-     * No se puede usar ning�n otro array auxiliar ni hay que ordenar previamente
+     *
+     * No se puede usar ningun otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public void segundoMaximo() {       
-       //TODO
-
-        
+    public int segundoMaximo() {
+        int firMax = Integer.MIN_VALUE;
+        int secMax = Integer.MIN_VALUE;
+        for (int i = 0; i < this.lista.length; i++) {
+            if (firMax < this.lista[i]) {
+                secMax = firMax;
+                firMax = this.lista[i];
+                continue;
+            }
+            if (secMax < this.lista[i] && this.lista[i] != firMax) {
+                secMax = this.lista[i];
+            }
+        }
+        return secMax;
     }
 
     /**
-     * El m�todo coloca los valores que son segundos m�ximos al principio de
-     * la lista respetando el orden de aparici�n del resto de elementos
-     * 
-     * No se puede usar ning�n otro array auxiliar ni hay que ordenar previamente
+     * El metodo coloca los valores que son segundos maximos al principio de
+     * la lista respetando el orden de aparicion del resto de elementos
+     *
+     * No se puede usar ningun otro array auxiliar ni hay que ordenar previamente
      * la lista
-     * 
-     * Si lista = {21, -5, 28, -7, 28, 77, 77, -17, 21, 15, 28, 28, 77} 
+     *
+     * Si lista = {21, -5, 28, -7, 28, 77, 77, -17, 21, 15, 28, 28, 77}
      * lista queda  {28, 28, 28, 28, 21, -5, -7, 77, 77, -17, 21, 15, 77} y se devuelve true
-     * 
+     *
      * Si lista = {77, 21} lista queda {21, 77} y se devuelve true
      * Si lista = {21} lista queda igual y se devuelve false
      * Si lista = {21, 21, 21, 21} lista queda igual y se devuelve false
-     * 
-     * @return true si se han colocado los segundos m�ximos
+     *
+     * @return true si se han colocado los segundos maximos
      *          false si no se han colocado los segundos m�ximos porque no hab�a ninguno
      */
-    public void segundosMaximosAlPrincipio() {
+    public boolean segundosMaximosAlPrincipio() {
         //TODO
-        
-        
+        int secMax = segundoMaximo();
+        int counter = 0;
 
+        if (secMax != Integer.MIN_VALUE) {
+            for (int i = 0; i < this.lista.length; i++) {
+                if (this.lista[i] == secMax) {
+
+                    counter++;
+                }
+            }
+            System.out.println(counter);
+            return true;
+        }
+        return false;
     }
 
     /**
-     * // @param numero b�squeda binaria de  numero en lista
-     * @return devuelve -1 si no se encuentra o la posici�n en la que aparece
-     *  
+     * // @param numero busqueda binaria de  numero en lista
+     * @return devuelve -1 si no se encuentra o la posicion en la que aparece
+     *
      * El array original lista no se modifica
      * Para ello crea  previamente una copia
      * de lista y trabaja  con la copia
-     *  
-     * Usa exclusivamente m�todos de la clase Arrays
+     *
+     * Usa exclusivamente metodos de la clase Arrays
      */
-    public void buscarBinario() {
+    public int buscarBinario(int num) {
          //TODO
-         
-         
+        int[] copy = Arrays.copyOf(this.lista, this.lista.length);
+        copy
 
+
+       return 0;
     }
 
     /**
-     * 
-     * @return devuelve un array bidimensional de enteros de tama�o DIMENSION
+     *
+     * @return devuelve un array bidimensional de enteros de tamano DIMENSION
      * inicializado con valores aleatorios entre 0 y 10 inclusive
-     * 
+     *
      * Estos valores van a representar el brillo de una zona del espacio
-     * 
+     *
      */
-    public void crearBrillos() {
-       //TODO
-       
-       
-
+    public static int[][] crearBrillos() {
+        int[][] brillos = new int[DIMENSION][DIMENSION];
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                brillos[i][j] = generador.nextInt(11);
+            }
+        }
+        return brillos;
     }
 
     /**
@@ -191,18 +245,30 @@ public class ListaNumeros {
      * @return un nuevo array bidimensional de valores booleanos
      *          de las mismas dimensiones que el array brillos con
      *          valores true en las posiciones donde hay estrellas
-     * 
-     * Una posici�n f,c del array brillos es una estrella 
-     * si la suma del valor de los brillos de sus cuatro vecinos 
+     *
+     * Una posicion f,c del array brillos es una estrella
+     * si la suma del valor de los brillos de sus cuatro vecinos
      * (arriba, abajo, derecha e izquierda) es mayor que 30
-     * 
+     *
      * Nota -  No hay estrellas en los bordes del array brillos
      */
-    public void detectarEstrellas() {
-       //TODO
-       
-       
-       
+     public static boolean[][] detectarEstrellas(int[][] array) {
+         boolean[][] hayEstrellas = new boolean[array.length][array.length];
+         for (boolean[] row: hayEstrellas) {
+             Arrays.fill(row, false);
+         }
+         for (int i = 0; i < array.length; i++) {
+             if (i != 0 && i != array.length - 1) {
+                 for (int j = 0; j < array[i].length; j++) {
+                     if (j != 0 && j != array[i].length - 1) {
+                         if ((array[i][j] + array[i-1][j] + array[i+1][j] + array[i][j+1] + array[i][j-1]) > 30) {
+                             hayEstrellas[i][j] = true;
+                         }
+                     }
+                 }
+             }
+         }
+        return hayEstrellas;
     }
 
 }
