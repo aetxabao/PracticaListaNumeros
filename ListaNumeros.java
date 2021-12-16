@@ -11,7 +11,7 @@
  */
 
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 
 import java.util.Arrays;
 import java.util.Random;
@@ -92,6 +92,7 @@ public class ListaNumeros {
      */
     public String toString() {
         if (estaVacia()) {
+            System.out.println("clean");
             return "";
         }
         String s = "";
@@ -262,7 +263,6 @@ public class ListaNumeros {
      */
      public static boolean[][] detectarEstrellas(int[][] array) {
          boolean[][] hayEstrellas = new boolean[array.length][array.length];
-
          for (int i = 0; i < array.length; i++) {
              if (i != 0 && i != array.length - 1) {
                  for (int j = 0; j < array[i].length; j++) {

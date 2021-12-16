@@ -1,5 +1,5 @@
 
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.Optional;
 
 import javafx.application.Application;
@@ -66,7 +66,6 @@ public class GuiLista extends Application {
                     * (MAX_INTERVALO_NUM - MIN_INTERVALO_NUM + 1))
                 + MIN_INTERVALO_NUM);
         }
-
     }
 
     private BorderPane crearGui() {
@@ -167,7 +166,7 @@ public class GuiLista extends Application {
     /**
      * añade un nuevo número a la lista mostrando el estado actual de la lista en el
      * área de texto
-     * 
+     *
      */
     private void addNumero() {
         mostrarLista();
@@ -267,7 +266,7 @@ public class GuiLista extends Application {
 
     /**
      * Muestra en el área de texto el segundo máximo
-     * 
+     *
      */
     private void segundoMaximo() {
         clear();
@@ -306,8 +305,8 @@ public class GuiLista extends Application {
     }
 
     /**
-     * pedir un valor e indicar si existe o no  en 
-     * la lista  
+     * pedir un valor e indicar si existe o no  en
+     * la lista
      */
     private void buscarBinaria() {
         clear();
