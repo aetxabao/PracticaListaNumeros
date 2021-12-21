@@ -7,10 +7,10 @@
  * y dos  métodos estáticos para trabajar con
  * arrays de dos dimensiones
  *
- * @author -
+ * @author - Asier Taberna Robles
  */
 
-
+import java.util.Arrays;
 import java.util.Random;
 
 public class ListaNumeros {
@@ -19,9 +19,9 @@ public class ListaNumeros {
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
-    //TODO
-    
-    
+    //DONE
+    private int[] lista;
+    private int pos; //Nº de numeros
 
     /**
      * Constructor de la clase ListaNumeros
@@ -30,9 +30,10 @@ public class ListaNumeros {
      *
      * @param n el tamaño máximo de la lista
      */
-    public ListaNumeros() {
-        //TODO
-        
+    public ListaNumeros(int numeros) {
+        //DONE
+        this.lista = new int[numeros]; //Entre corchetes (tamaño del array)
+        this.pos = 0;
     }
 
     /**
@@ -42,44 +43,50 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
-        //TODO
-        
-        
-
+    public boolean addElemento(int numero) {
+        //DONE
+        if(!estaCompleta()){
+            int[] copy = Arrays.copyOf(this.lista, this.lista.length+1);
+            copy[copy.length-1] = numero;
+            this.pos++;
+            System.out.println(copy);
+            return true;
+        }
+        return false;
     }
 
     /**
      * @return true si la lista está completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
-        //TODO
-
+    public boolean estaCompleta() {
+        //DONE
+        return (this.pos == this.DIMENSION);
     }
 
     /**
      * @return true si la lista está vacía, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
-       //TODO
-
+    public boolean estaVacia() {
+       //DONE
+       return (this.pos == 0);
     }
 
     /**
      * @return el nº de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
-        //TODO
-
+    public int getTotalNumeros() {
+        //DONE
+        return pos;
     }
 
     /**
      * Vacía la lista
      */
     public void vaciarLista() {
-       //TODO
+       //DONE
+       this.lista = new int[this.lista.length];
     }
 
     /**
@@ -96,8 +103,6 @@ public class ListaNumeros {
        return "";
     }
 
-     
-
     /**
      * Mostrar en pantalla la lista
      */
@@ -110,7 +115,7 @@ public class ListaNumeros {
      * @return el segundo valor máximo en la lista
      * Cuando no haya un segundo máximo el método 
      * devolverá el valor Integer.MIN_VALUE
-     * 
+     *                         //77 es el maximo y el segundo el 28//
      * Si lista = {21, -5, 28, -7, 28, 77, 77, -17, 21, 15, 28, 28, 77} se devuelve 28
      * Si lista = {21, -5, 28, -7, 77} se devuelve 28
      * Si lista = {77, 21} se devuelve 21
@@ -120,10 +125,10 @@ public class ListaNumeros {
      * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public void segundoMaximo() {       
+    public int segundoMaximo() {       
        //TODO
-
-        
+       
+        return 0;
     }
 
     /**
@@ -143,7 +148,7 @@ public class ListaNumeros {
      * @return true si se han colocado los segundos máximos
      *          false si no se han colocado los segundos máximos porque no había ninguno
      */
-    public void segundosMaximosAlPrincipio() {
+    public int segundosMaximosAlPrincipio() {
         //TODO
         
         
@@ -160,11 +165,10 @@ public class ListaNumeros {
      *  
      * Usa exclusivamente métodos de la clase Arrays
      */
-    public void buscarBinario() {
-         //TODO
-         
-         
-
+    public int buscarBinario(int numeros) {
+         //DONE
+         int[] copy = Arrays.copyOf(this.lista,this.lista.length);
+         return 0;
     }
 
     /**
@@ -175,11 +179,15 @@ public class ListaNumeros {
      * Estos valores van a representar el brillo de una zona del espacio
      * 
      */
-    public void crearBrillos() {
-       //TODO
-       
-       
-
+    public static int[][] crearBrillos() {
+       //DONE
+       int[][] brillos = new int[DIMENSION][DIMENSION];
+       for(int i=0; i<DIMENSION; i++){
+           for(int j=0; j<DIMENSION; j++){
+               brillos[i][j] = generador.nextInt(11); //el numero 11 no se incluye solamente hace de tope entre 0 y 10
+           }
+       }
+       return brillos;
     }
 
     /**
@@ -195,9 +203,7 @@ public class ListaNumeros {
      * Nota -  No hay estrellas en los bordes del array brillos
      */
     public void detectarEstrellas() {
-       //TODO
-       
-       
+       //TODO       
        
     }
 
