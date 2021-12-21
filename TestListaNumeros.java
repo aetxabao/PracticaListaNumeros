@@ -89,7 +89,7 @@ public class TestListaNumeros
     public static void testBuscarBinario(ListaNumeros lista, int numero) {
         System.out.println("Haciendo una búsqueda binaria");
         System.out.println(lista.toString());
-        System.out.println("El valor " + numero + " existe en lista? " + (lista.buscarBinario(numero) != -1));
+        //System.out.println("El valor " + numero + " existe en lista? " + (lista.buscarBinario(numero) != -1));
     }
 
     public static void testDetectarEstrellas() {
@@ -102,12 +102,12 @@ public class TestListaNumeros
         }
 
         System.out.println();
-        boolean[][] estrellas = ListaNumeros.detectarEstrellas(brillos);
-        for (boolean[] f : estrellas) {
-            java.util.stream.IntStream.range(0, f.length)
-            .mapToObj(i -> f[i]).forEach(n -> System.out.printf("%7b", n));
-            System.out.println();
-        }
+        //boolean[][] estrellas = ListaNumeros.detectarEstrellas(brillos);
+        //for (boolean[] f : estrellas) {
+           // java.util.stream.IntStream.range(0, f.length)
+           // .mapToObj(i -> f[i]).forEach(n -> System.out.printf("%7b", n));
+           // System.out.println();
+        //}
     }
 
     public static void separador() {
