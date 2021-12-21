@@ -12,14 +12,19 @@
 
 
 import java.util.Random;
+import java.util.Arrays;
 
-public class ListaNumeros {
+    public class ListaNumeros {
     public static final int DIMENSION = 10;
     public static final int ANCHO_FORMATO = 6;
     public static final char CAR_CABECERA = '-';
 
     private static final Random generador = new Random();
     //TODO
+    public int[] lista;
+    public int pos;
+    
+    
     
     
 
@@ -30,8 +35,9 @@ public class ListaNumeros {
      *
      * @param n el tamaño máximo de la lista
      */
-    public ListaNumeros() {
+    public ListaNumeros(int n) {
         //TODO
+        lista = new int[n];
         
     }
 
@@ -42,10 +48,15 @@ public class ListaNumeros {
      * @param numero el valor que se añade.  
      * @return true si se ha podido añadir, false en otro caso
      */
-    public void addElemento() {
+    public boolean addElemento() {
         //TODO
-        
-        
+        if(estaCompleta()){
+            return false;
+        }else{
+            return true;
+        }
+            
+
 
     }
 
@@ -53,8 +64,9 @@ public class ListaNumeros {
      * @return true si la lista está completa, false en otro caso
      * Hacer sin if
      */
-    public void estaCompleta() {
+    public boolean estaCompleta() {
         //TODO
+        return pos == lista.length;
 
     }
 
@@ -62,24 +74,25 @@ public class ListaNumeros {
      * @return true si la lista está vacía, false en otro caso.
      * Hacer sin if
      */
-    public void estaVacia() {
+    public boolean estaVacia() {
        //TODO
-
+        return pos == 0;
     }
 
     /**
      * @return el nº de elementos realmente guardados en la lista
      */
-    public void getTotalNumeros() {
+    public int  getTotalNumeros() {
         //TODO
-
+        return pos;
     }
 
     /**
      * Vacía la lista
      */
-    public void vaciarLista() {
+    public boolean vaciarLista() {
        //TODO
+       return pos == 0;
     }
 
     /**
@@ -90,6 +103,12 @@ public class ListaNumeros {
      */
     public String toString() {
        //TODO
+       String str = "";
+       if(estaVacia()){
+           for ( int i = 0; i <=ANCHO_FORMATO; i++){
+               str += CAR_CABECERA;
+           }
+       }
        
        
        
@@ -120,10 +139,27 @@ public class ListaNumeros {
      * No se puede usar ningún otro array auxiliar ni hay que ordenar previamente
      * la lista
      */
-    public void segundoMaximo() {       
+    public int segundoMaximo() {       
        //TODO
-
-        
+         
+       if (lista.length ==1)
+       return Integer.MIN_VALUE;
+       int max = lista[0];
+       int segundoMax = lista[0];
+       
+       for ( int i = 1; i<lista.length; i++){
+           if(max < lista[i])
+           max = lista[i];
+       }
+       for ( int i = 1; i<lista.length;i++){
+           if(segundoMax<lista[i]&& max!= lista[i])
+           segundoMax = lista[i];
+       }
+       if (max == segundoMax)
+       return Integer.MIN_VALUE;
+    
+       return segundoMax;
+    
     }
 
     /**
@@ -143,9 +179,28 @@ public class ListaNumeros {
      * @return true si se han colocado los segundos máximos
      *          false si no se han colocado los segundos máximos porque no había ninguno
      */
-    public void segundosMaximosAlPrincipio() {
+    public boolean segundosMaximosAlPrincipio() {
         //TODO
         
+        int x = 0;
+        if(lista.length <= 1){
+            return false;
+        }else
+        
+        {
+            for( int i = 0; i < lista.length; i++) {
+                if (lista[i] == segundoMaximo()){
+                    for (int j = 0; j<0;j++){
+                        lista[j] = lista[j +1];
+                    }
+                    lista[x] = segundoMaximo();
+                    x++;
+                }
+            }
+        }
+        
+        
+        return true;
         
 
     }
@@ -160,10 +215,21 @@ public class ListaNumeros {
      *  
      * Usa exclusivamente métodos de la clase Arrays
      */
-    public void buscarBinario() {
+    public int buscarBinario(int num) {
          //TODO
+         int[] listacopy = Arrays.copyOf(lista,lista.length);
          
+         if(Arrays.binarySearch(listacopy,num)>-1){
+             for (int i = 0;i<listacopy.length; i++){
+                 if (listacopy [i] == num){
+                     return i;
+                 }
+                 
+                 
+             }
+         }
          
+         return -1;
 
     }
 
@@ -175,9 +241,17 @@ public class ListaNumeros {
      * Estos valores van a representar el brillo de una zona del espacio
      * 
      */
-    public void crearBrillos() {
+    public static int [][] crearBrillos() {
        //TODO
-       
+       int i = 0;
+       int[][]brillos = new int[DIMENSION][DIMENSION];
+       for ( i = 0; i<brillos.length; i++){
+           for (int j = 0; j<brillos[0].length; j++){
+               brillos[i][j] = generador.nextInt(10)+1;
+               
+           }
+       }
+       return brillos;
        
 
     }
@@ -196,7 +270,7 @@ public class ListaNumeros {
      */
     public void detectarEstrellas() {
        //TODO
-       
+       int x = 0;
        
        
     }
