@@ -1,0 +1,72 @@
+@startuml
+class Utilidades {
++ {static} String centrarNumero(int,int)
+}
+class Main {
++ {static} void main(String[])
+}
+class GuiLista {
+- {static} int TAM_LISTA
+- {static} int MIN_INTERVALO_NUM
+- {static} int MAX_INTERVALO_NUM
+- Stage stage
+- Button btnAdd
+- Button btnSegundoMaximo
+- Button btnSegundosPrincipio
+- Button btnBuscarBinaria
+- Button btnEstrellas
+- Button btnMostrarLista
+- Button btnVaciarLista
+- Button btnClear
+- Button btnSalir
+- TextField txtNumero
+- TextArea areaTexto
+- ListaNumeros lista
++ {static} void main(String[])
++ void start(Stage)
+- void crearLista()
+- BorderPane crearGui()
+- BorderPane crearPanelCentral()
+- HBox crearPanelEntrada()
+- VBox crearPanelBotones()
+- void mostrarLista()
+- void escribirLista()
+- void addNumero()
+- void detectarEstrellas()
+- GridPane crearPanel2D(int[][],boolean[][])
+- void segundoMaximo()
+- void segundosAlPrincipio()
+- void buscarBinaria()
+- int pedirNumero(String)
+- void vaciarLista()
+- void clear()
+- void salir()
+- void cogerFoco()
+}
+class ListaNumeros {
++ {static} int DIMENSION
++ {static} int ANCHO_FORMATO
++ {static} char CAR_CABECERA
+- {static} Random generador
+- int[] lista
+- int pos
++ <<Create>> ListaNumeros(int)
++ boolean addElemento(int)
++ boolean estaCompleta()
++ boolean estaVacia()
++ int getTotalNumeros()
++ void vaciarLista()
++ String toString()
++ void escribirLista()
++ int segundoMaximo()
++ boolean segundosMaximosAlPrincipio()
++ int buscarBinario(int)
++ {static} int[][] crearBrillos()
++ {static} boolean[][] detectarEstrellas(int[][])
+}
+
+Main .right.> GuiLista
+GuiLista -right-> ListaNumeros
+ListaNumeros .right.> Utilidades
+
+@enduml
