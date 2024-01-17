@@ -252,7 +252,7 @@ public class GuiLista extends Application {
         boolean[][] estrellas = lista.detectarEstrellas(brillos);
 
         GridPane panel2D = crearPanel2D(brillos, estrellas);
-        Scene escena2D = new Scene(panel2D, 400, 300);
+        Scene escena2D = new Scene(panel2D, 600, 600);
 
         Stage escenario2D = new Stage();
 
